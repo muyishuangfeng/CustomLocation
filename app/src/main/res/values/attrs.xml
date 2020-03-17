@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--侧边栏选择-->
+    <attr name="indexBarTextSize" format="dimension" />
+    <declare-styleable name="IndexBar">
+        <attr name="indexBarTextSize" />
+        <attr name="indexBarPressBackground" format="color" />
+    </declare-styleable>
+    <!--侧滑-->
+    <declare-styleable name="SlidingMenu">
+        <attr name="menuRightMargin" format="dimension" />
+    </declare-styleable>
+</resources>

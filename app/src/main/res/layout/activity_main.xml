@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.yk.silence.toolbar.CustomTitleBar
+        android:id="@+id/title_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:middleTextColor="@color/colorBlack"
+        app:rightTitle="@string/text_location"
+        app:middleTextSize="@dimen/sp_16"
+        app:rightTextColor="@color/colorBlack"
+        app:rightTextSize="@dimen/sp_14"
+        app:middleTitle="@string/text_contact" />
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_contact_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_contact"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rlv_contact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.silence.customlocation.ui.sidebar.IndexBar
+        android:id="@+id/index_bar"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorWhite"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txt_index_content"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_side_bar_bg"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_48"
+        android:visibility="gone" />
+
+</RelativeLayout>

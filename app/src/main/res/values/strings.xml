@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CustomLocation</string>
+    <string name="text_read_contact">读取联系人</string>
+    <string name="text_read">读写权限</string>
+    <string name="permission_get">权限提示</string>
+    <string name="permission_desc">亲：为了更好的使用此应用，请同意一下权限</string>
+    <string name="text_default">默认</string>
+    <string name="text_contact">通讯录</string>
+    <string name="map_key">4ac069605903d4ad156ea3c42b3288a5</string>
+    <string name="text_location">定位</string>
+    <string name="text_start">开始定位</string>
+    <string name="text_stop">停止定位</string>
+</resources>
