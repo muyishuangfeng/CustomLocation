@@ -82,4 +82,5 @@ dependencies {
     //高德定位
     implementation 'com.amap.api:location:4.2.0'
     implementation 'com.github.promeg:tinypinyin:2.0.1'
+
 }

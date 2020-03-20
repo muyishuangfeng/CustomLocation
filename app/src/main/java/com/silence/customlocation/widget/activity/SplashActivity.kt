@@ -5,6 +5,7 @@ import android.animation.Animator
 import android.util.Log
 import com.silence.customlocation.R
 import com.silence.customlocation.base.BaseActivity
+import com.silence.customlocation.util.PreferencesUtils
 import com.silence.customlocation.util.Sha1Util
 import com.yk.silent.permission.HiPermission
 import com.yk.silent.permission.impl.PermissionCallback
