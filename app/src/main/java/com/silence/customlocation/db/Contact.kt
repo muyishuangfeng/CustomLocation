@@ -23,4 +23,10 @@ class Contact {
     var userRemark: String? = ""
     //显示数据拼音的首字母
     var sortLetters: String? = null
+
+    override fun toString(): String {
+        return "Contact(id=$id, userName=$userName, userPhone=$userPhone, userRemark=$userRemark, sortLetters=$sortLetters)"
+    }
+
+
 }

@@ -9,14 +9,7 @@ import com.silence.customlocation.base.BaseFragment
 import com.silence.customlocation.db.Contact
 import com.silence.customlocation.db.ContactViewModel
 import com.silence.customlocation.impl.OnItemInviteListener
-import com.silence.customlocation.model.ContactBean
-import com.silence.customlocation.util.contact.ContactUtil
 import com.silence.customlocation.widget.adapter.ContactListAdapter
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_contact.*
 import java.util.ArrayList
 
@@ -40,17 +33,12 @@ class ContactFragment : BaseFragment(), OnItemInviteListener,
         )
         srl_contact_list.isRefreshing = true
         srl_contact_list.setOnRefreshListener(this)
-        viewModel = ViewModelProvider(this).get(ContactViewModel::class.java)
-        viewModel.allContacts.observe(this, androidx.lifecycle.Observer {
-            mList = it
-            srl_contact_list.isRefreshing = mList!!.isEmpty()
-            initAdapter(mList!!)
-        })
+        initData()
     }
 
 
     override fun onRefresh() {
-
+        initData()
     }
 
     override fun onInviteClick(position: Int) {
@@ -69,5 +57,16 @@ class ContactFragment : BaseFragment(), OnItemInviteListener,
         mAdapter!!.notifyDataSetChanged()
     }
 
+    /**
+     * 初始化数据
+     */
+    private fun initData() {
+        viewModel = ViewModelProvider(this).get(ContactViewModel::class.java)
+        viewModel.allContacts.observe(this, androidx.lifecycle.Observer {
+            mList = it
+            srl_contact_list.isRefreshing = mList!!.isEmpty()
+            initAdapter(mList!!)
+        })
+    }
 
 }

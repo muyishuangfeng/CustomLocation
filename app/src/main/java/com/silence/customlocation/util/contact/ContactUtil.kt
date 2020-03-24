@@ -7,7 +7,6 @@ import android.database.Cursor
 import android.provider.ContactsContract
 import android.util.Log
 import com.silence.customlocation.db.Contact
-import com.silence.customlocation.model.ContactBean
 import kotlin.collections.ArrayList
 import com.silence.customlocation.util.contact.pinyin.PinyinComparator
 import java.util.*
@@ -81,9 +80,9 @@ object ContactUtil {
     /**
      * 根据联系人姓名查询电话
      */
-    fun searchPhone(context: Context, name: String): MutableList<ContactBean> {
-        val mList = ArrayList<ContactBean>()
-        val mBean = ContactBean()
+    fun searchPhone(context: Context, name: String): MutableList<Contact> {
+        val mList = ArrayList<Contact>()
+        val mBean = Contact()
         val dataCursor = context.contentResolver.query(
             ContactsContract.Data.CONTENT_URI,
             arrayOf(ContactsContract.Data.DATA1),
@@ -91,13 +90,13 @@ object ContactUtil {
             arrayOf(name), null
         )
         if (dataCursor!!.count > 0) {
-            mBean.mName = name
+            mBean.userName = name
             while (dataCursor.moveToNext()) {
                 var phone =
                     dataCursor.getString(dataCursor.getColumnIndex(ContactsContract.Data.DATA1))
                 phone = phone.replace("-", "")
                 phone = phone.replace(" ", "")
-                mBean.mPhone = phone
+                mBean.userPhone = phone
             }
             mList.add(mBean)
             dataCursor.close()

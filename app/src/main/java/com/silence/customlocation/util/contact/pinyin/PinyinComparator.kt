@@ -1,7 +1,6 @@
 package com.silence.customlocation.util.contact.pinyin
 
 import com.silence.customlocation.db.Contact
-import com.silence.customlocation.model.ContactBean
 
 
 /**

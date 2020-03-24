@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.silence.customlocation.R
 import com.silence.customlocation.db.Contact
 import com.silence.customlocation.impl.OnItemInviteListener
-import com.silence.customlocation.model.ContactBean
 import kotlinx.android.synthetic.main.item_contact_list_layout.view.*
 
 class ContactListAdapter(context: Context, list: MutableList<Contact>) :
