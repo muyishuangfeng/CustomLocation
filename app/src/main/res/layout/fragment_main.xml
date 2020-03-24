@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.yk.silence.toolbar.CustomTitleBar
+        android:id="@+id/title_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:middleTextColor="@color/colorBlack"
+        app:middleTextSize="@dimen/sp_16"
+        app:middleTitle="@string/text_contact"
+        app:rightTextColor="@color/colorBlack"
+        app:rightTextSize="@dimen/sp_14" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_btn_view"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconTint="@color/colorWhite"
+        app:itemTextColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_view_pager"
+        app:menu="@menu/main_menu" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/main_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_btn_view"
+        app:layout_constraintTop_toBottomOf="@+id/title_contact" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

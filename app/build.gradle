@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
@@ -32,6 +32,10 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
@@ -45,7 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.airbnb.android:lottie:3.0.7'
     //glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -82,5 +86,24 @@ dependencies {
     //高德定位
     implementation 'com.amap.api:location:4.2.0'
     implementation 'com.github.promeg:tinypinyin:2.0.1'
+    implementation "android.arch.navigation:navigation-fragment:1.0.0"
+    implementation "android.arch.navigation:navigation-ui:1.0.0"
+
+    // Room components
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.androidxArchVersion"
+
+// ViewModel Kotlin support
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
+
+// Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 
 }

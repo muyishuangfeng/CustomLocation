@@ -33,13 +33,9 @@ class SplashActivity : BaseActivity() {
         val permissionItems = ArrayList<PermissionItem>()
         permissionItems.add(PermissionItem(Manifest.permission.READ_PHONE_STATE,
                 resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
-        permissionItems.add(PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE,
-                resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
         permissionItems.add(PermissionItem(Manifest.permission.ACCESS_FINE_LOCATION,
                 resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
         permissionItems.add(PermissionItem(Manifest.permission.ACCESS_COARSE_LOCATION,
-                resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
-        permissionItems.add(PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
         permissionItems.add(PermissionItem(Manifest.permission.READ_CONTACTS,
                 resources.getString(R.string.text_read_contact), R.drawable.permission_ic_contacts))

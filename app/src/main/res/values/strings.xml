@@ -10,4 +10,7 @@
     <string name="text_location">定位</string>
     <string name="text_start">开始定位</string>
     <string name="text_stop">停止定位</string>
+    <string name="text_mine">我的</string>
+    <string name="text_home">主页</string>
+    <string name="text_load">加载</string>
 </resources>

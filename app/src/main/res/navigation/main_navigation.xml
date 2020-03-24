@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainFragment"
+    tools:ignore="UnusedNavigation">
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.silence.customlocation.widget.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.silence.customlocation.widget.fragment.ContactFragment"
+        android:label="ContactFragment"
+        tools:layout="@layout/fragment_contact" />
+    <fragment
+        android:id="@+id/myselfFragment"
+        android:name="com.silence.customlocation.widget.fragment.MyselfFragment"
+        android:label="MyselfFragment"
+        tools:layout="@layout/fragment_myself" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.silence.customlocation.widget.fragment.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
+</navigation>
