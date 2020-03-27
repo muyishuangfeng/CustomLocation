@@ -35,7 +35,6 @@ android {
         }
 
 
-
     }
     buildTypes {
         release {
@@ -131,5 +130,7 @@ dependencies {
     // 极光
     implementation 'cn.jiguang.sdk:jmessage:2.9.0'
     implementation 'cn.jiguang.sdk:jcore:2.0.0'
+    //下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-26'
 
 }

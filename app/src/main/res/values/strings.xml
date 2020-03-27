@@ -26,4 +26,5 @@
     <string name="text_take_photo">拍照</string>
     <string name="text_album">相册</string>
     <string name="text_add_photo">添加照片</string>
+    <string name="text_empty">这是一个空布局</string>
 </resources>
