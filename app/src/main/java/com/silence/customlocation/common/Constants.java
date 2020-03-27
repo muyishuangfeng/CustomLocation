@@ -11,4 +11,20 @@ public class Constants {
     public static final int MSG_TAKE_PHOTO = BASE_CODE + 3;
 
 
+
+
+    /***名称*/
+    public static final String USER_NAME="USER_NAME";
+    /***邮箱*/
+    public static final String USER_EMAIL="USER_EMAIL";
+    /***密码*/
+    public static final String USER_PASS="USER_PASS";
+    /***昵称*/
+    public static final String USER_NICE_NAME="USER_NICE_NAME";
+    /***年龄*/
+    public static final String USER_AGE="USER_AGE";
+    /***头像路径*/
+    public static final String USER_AVATAR_PATH="USER_AVATAR_PATH";
+
+
 }

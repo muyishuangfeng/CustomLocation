@@ -1,6 +1,6 @@
-package com.silence.customlocation.widget.fragment
+package com.silence.customlocation.widget.activity
 
-import android.app.Activity.RESULT_OK
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
@@ -9,41 +9,40 @@ import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import androidx.core.os.EnvironmentCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.silence.customlocation.R
-import com.silence.customlocation.base.BaseFragment
+import com.silence.customlocation.base.BaseActivity
 import com.silence.customlocation.common.Constants
 import com.silence.customlocation.util.glide.GlideUtils
-import kotlinx.android.synthetic.main.fragment_myself.*
+import kotlinx.android.synthetic.main.activity_user_info.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-class MyselfFragment : BaseFragment() {
+class UserInfoActivity : BaseActivity() {
 
     //是否是Android 10以上手机
     private val isAndroidQ =
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     //用于保存拍照图片的uri
     private var mCameraUri: Uri? = null
-    // 用于保存图片的文件路径，Android 10以下使用图片路径访问图片
+    //用于保存图片的文件路径，Android 10以下使用图片路径访问图片
     private var mCameraImagePath: String? = null
 
+
     override fun getLayoutID(): Int {
-        return R.layout.fragment_myself
+        return R.layout.activity_user_info
     }
 
-    override fun initView() {
-
-    }
-
-    override fun lazyLoadData() {
-        super.lazyLoadData()
-        btn_load.setOnClickListener {
+    override fun initData() {
+        img_user_icon.setOnClickListener {
             openCamera()
         }
+        btn_finish.setOnClickListener {
 
+        }
     }
 
 
@@ -51,13 +50,13 @@ class MyselfFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             Constants.MSG_TAKE_PHOTO -> {//拍照
-                if (resultCode == RESULT_OK) {
+                if (resultCode == Activity.RESULT_OK) {
                     if (isAndroidQ) {
                         // Android 10 使用图片uri加载
-                        GlideUtils.loadUri(mActivity!!,mCameraUri,img_avatar)
+                        GlideUtils.loadUri(this,mCameraUri,img_user_icon)
                     } else {
                         // 使用图片路径加载
-                        GlideUtils.loadPath(mActivity!!,mCameraImagePath,img_avatar)
+                        GlideUtils.loadPath(this,mCameraImagePath,img_user_icon)
                     }
                 }
             }
@@ -71,7 +70,7 @@ class MyselfFragment : BaseFragment() {
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         // 判断是否有相机
-        if (intent.resolveActivity(mActivity!!.packageManager) != null) {
+        if (intent.resolveActivity(packageManager) != null) {
             var mPhotoFile: File? = null
             var mPhotoUri: Uri? = null
             if (isAndroidQ) {
@@ -87,7 +86,7 @@ class MyselfFragment : BaseFragment() {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         //适配Android 7.0文件权限，通过FileProvider创建一个content类型的Uri
                         mPhotoUri = FileProvider.getUriForFile(
-                            mActivity!!, mActivity!!.packageName
+                            this, packageName
                                     + ".fileprovider", mPhotoFile
                         );
                     } else {
@@ -112,11 +111,11 @@ class MyselfFragment : BaseFragment() {
         val status = Environment.getExternalStorageState()
         // 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
         return if (status == Environment.MEDIA_MOUNTED) {
-            mActivity!!.contentResolver.insert(
+            contentResolver.insert(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, ContentValues()
             )
         } else {
-            mActivity!!.contentResolver.insert(
+            contentResolver.insert(
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI, ContentValues()
             )
         }
@@ -131,7 +130,7 @@ class MyselfFragment : BaseFragment() {
     private fun createImageFile(): File? {
         val imageName: String =
             SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val storageDir: File? = mActivity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         if (!storageDir!!.exists()) {
             storageDir.mkdir()
         }

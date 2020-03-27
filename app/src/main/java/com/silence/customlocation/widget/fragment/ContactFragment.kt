@@ -33,6 +33,9 @@ class ContactFragment : BaseFragment(), OnItemInviteListener,
         )
         srl_contact_list.isRefreshing = true
         srl_contact_list.setOnRefreshListener(this)
+    }
+
+    override fun lazyLoadData() {
         initData()
     }
 
@@ -68,5 +71,6 @@ class ContactFragment : BaseFragment(), OnItemInviteListener,
             initAdapter(mList!!)
         })
     }
+
 
 }

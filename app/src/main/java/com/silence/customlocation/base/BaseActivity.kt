@@ -6,6 +6,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.githang.statusbar.StatusBarCompat
 import com.silence.customlocation.R
 import com.silence.customlocation.common.ActivityStackManager
 import com.silence.customlocation.widget.activity.MainActivity
@@ -19,6 +20,7 @@ abstract class BaseActivity : SwipeBackActivity() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(getLayoutID())
         ActivityStackManager.instance.addActivity(this)
+        setStatusColor()
         setSwipeLayout()
         initData()
     }
@@ -33,7 +35,13 @@ abstract class BaseActivity : SwipeBackActivity() {
      */
     abstract fun initData()
 
-
+    /**
+     * 设置状态栏颜色
+     */
+    open fun setStatusColor() {
+        StatusBarCompat.setStatusBarColor(this,
+            resources.getColor(R.color.colorBlue))
+    }
 
 
     /**
@@ -105,16 +113,16 @@ abstract class BaseActivity : SwipeBackActivity() {
     protected fun switchFragment(targetFragment: Fragment): FragmentTransaction {
         val currentFragment = Fragment()
         val transaction = supportFragmentManager
-                .beginTransaction()
+            .beginTransaction()
         if (!targetFragment.isAdded) {
             //第一次使用switchFragment()时currentFragment为null，所以要判断一下
             transaction.hide(currentFragment)
             transaction.add(R.id.fl_container, targetFragment, targetFragment.javaClass.name)
         } else {
             transaction
-                    .hide(currentFragment)
-                    .show(targetFragment)
-                    .commit()
+                .hide(currentFragment)
+                .show(targetFragment)
+                .commit()
         }
         currentFragment == targetFragment
         return transaction

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yk.silence.toolbar.CustomTitleBar
+        android:id="@+id/title_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:middleTextColor="@color/colorWhite"
+        app:middleTextSize="@dimen/sp_14"
+        app:middleTitle="@string/text_user_info" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_user_icon"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp_50"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_user_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_user" />
+
+
+    <RelativeLayout
+        android:id="@+id/ryt_nick_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginRight="@dimen/dp_30"
+        app:layout_constraintTop_toBottomOf="@+id/img_user_icon">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_nick_name"
+            android:textColorHint="@color/colorGray"
+            android:textSize="@dimen/sp_16" />
+
+        <com.silence.customlocation.ui.edittext.ClearWriteEditText
+            android:id="@+id/edt_nick_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_62"
+            android:background="@null"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorGray"
+            android:textSize="@dimen/sp_16" />
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@color/colorBlue"
+        android:text="@string/text_finish"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/ryt_nick_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

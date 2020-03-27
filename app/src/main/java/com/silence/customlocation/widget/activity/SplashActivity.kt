@@ -2,11 +2,9 @@ package com.silence.customlocation.widget.activity
 
 import android.Manifest
 import android.animation.Animator
-import android.util.Log
+import cn.jpush.im.android.api.JMessageClient
 import com.silence.customlocation.R
 import com.silence.customlocation.base.BaseActivity
-import com.silence.customlocation.util.PreferencesUtils
-import com.silence.customlocation.util.Sha1Util
 import com.yk.silent.permission.HiPermission
 import com.yk.silent.permission.impl.PermissionCallback
 import com.yk.silent.permission.model.PermissionItem
@@ -22,8 +20,9 @@ class SplashActivity : BaseActivity() {
 
     override fun initData() {
         initPermission()
-        Log.e("TAG","============="+Sha1Util.sHA1(this))
     }
+
+
 
 
     /**
@@ -31,33 +30,67 @@ class SplashActivity : BaseActivity() {
      */
     private fun initPermission() {
         val permissionItems = ArrayList<PermissionItem>()
-        permissionItems.add(PermissionItem(Manifest.permission.READ_PHONE_STATE,
-                resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
-        permissionItems.add(PermissionItem(Manifest.permission.ACCESS_FINE_LOCATION,
-                resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
-        permissionItems.add(PermissionItem(Manifest.permission.ACCESS_COARSE_LOCATION,
-                resources.getString(R.string.text_read), R.drawable.permission_ic_storage))
-        permissionItems.add(PermissionItem(Manifest.permission.READ_CONTACTS,
-                resources.getString(R.string.text_read_contact), R.drawable.permission_ic_contacts))
+        permissionItems.add(
+            PermissionItem(
+                Manifest.permission.READ_PHONE_STATE,
+                resources.getString(R.string.text_read), R.drawable.permission_ic_storage
+            )
+        )
+        permissionItems.add(
+            PermissionItem(
+                Manifest.permission.CAMERA,
+                resources.getString(R.string.text_read), R.drawable.permission_ic_storage
+            )
+        )
+        permissionItems.add(
+            PermissionItem(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                resources.getString(R.string.text_read), R.drawable.permission_ic_storage
+            )
+        )
+        permissionItems.add(
+            PermissionItem(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                resources.getString(R.string.text_read), R.drawable.permission_ic_storage
+            )
+        )
+        permissionItems.add(
+            PermissionItem(
+                Manifest.permission.READ_CONTACTS,
+                resources.getString(R.string.text_read_contact), R.drawable.permission_ic_contacts
+            )
+        )
+        permissionItems.add(
+            PermissionItem(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                resources.getString(R.string.text_read_contact), R.drawable.permission_ic_contacts
+            )
+        )
+        permissionItems.add(
+            PermissionItem(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                resources.getString(R.string.text_read_contact), R.drawable.permission_ic_contacts
+            )
+        )
         HiPermission.create(this)
-                .title(resources.getString(R.string.permission_get))
-                .msg(resources.getString(R.string.permission_desc))
-                .permissions(permissionItems)
-                .checkMutiPermission(object : PermissionCallback {
-                    override fun onClose() {
-                    }
+            .title(resources.getString(R.string.permission_get))
+            .msg(resources.getString(R.string.permission_desc))
+            .permissions(permissionItems)
+            .checkMutiPermission(object : PermissionCallback {
+                override fun onClose() {
+                }
 
-                    override fun onDeny(permission: String?, position: Int) {
-                    }
+                override fun onDeny(permission: String?, position: Int) {
+                }
 
-                    override fun onFinish() {
-                        initView()
-                    }
+                override fun onFinish() {
+                    initView()
+                }
 
-                    override fun onGuarantee(permission: String?, position: Int) {
+                override fun onGuarantee(permission: String?, position: Int) {
 
-                    }
-                })
+                }
+            })
     }
 
     /**
@@ -70,8 +103,19 @@ class SplashActivity : BaseActivity() {
 
             override fun onAnimationEnd(animation: Animator?) {
                 lav_splash.cancelAnimation()
+                //检测账号是否登陆
                 startActivity(MainActivity::class.java)
                 finish()
+//                val myInfo = JMessageClient.getMyInfo()
+//                if (myInfo == null) {
+//                    startActivity(LoginActivity::class.java)
+//                    finish()
+//                } else {
+//                    startActivity(MainActivity::class.java)
+//                    finish()
+//                }
+
+
             }
 
             override fun onAnimationRepeat(animation: Animator?) {

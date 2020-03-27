@@ -3,11 +3,11 @@ package com.silence.customlocation.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class PreferencesUtils {
+public class SPUTil {
 
     private static SharedPreferences settings;
 
-    private PreferencesUtils() {
+    private SPUTil() {
         throw new AssertionError();
     }
 

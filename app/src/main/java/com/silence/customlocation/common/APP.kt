@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.multidex.MultiDex
+import cn.jpush.im.android.api.JMessageClient
 
 
 class APP : Application() {
@@ -24,6 +25,9 @@ class APP : Application() {
         super.onCreate()
         MultiDex.install(this);
         registerLifecycle()
+        //极光
+        JMessageClient.setDebugMode(true)
+        JMessageClient.init(this,true)
     }
 
     private fun registerLifecycle() {

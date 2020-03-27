@@ -13,4 +13,13 @@
     <string name="text_mine">我的</string>
     <string name="text_home">主页</string>
     <string name="text_load">加载</string>
+    <string name="text_login">登录</string>
+    <string name="text_no_account">还没有账号?</string>
+    <string name="text_register">注册</string>
+    <string name="text_hint_password">请输入密码</string>
+    <string name="text_hint_account">请输入用户名</string>
+    <string name="text_welcome">Welcome</string>
+    <string name="text_user_info">用户信息</string>
+    <string name="text_nick_name">昵称</string>
+    <string name="text_finish">完成</string>
 </resources>

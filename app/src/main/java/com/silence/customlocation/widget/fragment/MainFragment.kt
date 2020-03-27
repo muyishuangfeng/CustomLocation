@@ -1,7 +1,7 @@
 package com.silence.customlocation.widget.fragment
 
+import android.app.Activity
 import android.os.Handler
-import android.os.Looper
 import android.os.Message
 import android.util.Log
 import android.view.MenuItem
@@ -14,14 +14,15 @@ import com.silence.customlocation.base.BaseFragment
 import com.silence.customlocation.common.Constants
 import com.silence.customlocation.model.GpsModel
 import com.silence.customlocation.util.gps.GetGpsThread
-import com.silence.customlocation.widget.adapter.FragmentDetailAdapter
+import com.silence.customlocation.widget.adapter.FragmentLazyStateAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.lang.ref.WeakReference
 
 class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    var mGpsThread: GetGpsThread? = null
-    var mGpsModel: GpsModel? = null
-    var mList: MutableList<Fragment>? = ArrayList()
+    private var mGpsThread: GetGpsThread? = null
+    private var mList: MutableList<Fragment>? = ArrayList()
+    private var mHandler: MyHandler? = null
 
 
     override fun getLayoutID(): Int {
@@ -29,15 +30,14 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
     }
 
     override fun initView() {
-        mList?.add(HomeFragment())
-        mList?.add(ContactFragment())
-        mList?.add(MyselfFragment())
-        main_view_pager?.adapter = FragmentDetailAdapter(this, mList!!)
-        bottom_btn_view?.setOnNavigationItemSelectedListener(this)
-        initEvent()
-
+        mHandler = MyHandler(mActivity!!)
         mGpsThread = GetGpsThread(mActivity, mHandler)
         mGpsThread?.start()
+    }
+
+    override fun lazyLoadData() {
+        super.lazyLoadData()
+        initEvent()
     }
 
     override fun onStop() {
@@ -52,6 +52,7 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
         if (mGpsThread != null) {
             mGpsThread!!.destroyLocation()
         }
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -69,12 +70,21 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
         return true
     }
 
+
+
     /**
      * Handler
      */
-    private var mHandler: Handler = object : Handler(Looper.getMainLooper()) {
-        override fun dispatchMessage(msg: Message) {
-            super.dispatchMessage(msg)
+    open class MyHandler(activity: Activity) : Handler() {
+        var mActivity: WeakReference<Activity>? = null
+        private var mGpsModel: GpsModel? = null
+
+        init {
+            mActivity = WeakReference(activity)
+        }
+
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
             when (msg.what) {
                 Constants.MESSAGE_LOCATION_FAILED -> {//定位失败
 
@@ -83,7 +93,7 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
                     mGpsModel = msg.obj as GpsModel?
                     Log.e("TAG", mGpsModel.toString())
                     Toast.makeText(
-                        mActivity, mGpsModel?.address,
+                        mActivity?.get(), mGpsModel?.address,
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -96,6 +106,11 @@ class MainFragment : BaseFragment(), BottomNavigationView.OnNavigationItemSelect
      * 设置viewPager2事件
      */
     private fun initEvent() {
+        mList?.add(HomeFragment())
+        mList?.add(ContactFragment())
+        mList?.add(MyselfFragment())
+        main_view_pager?.adapter = FragmentLazyStateAdapter(this, mList!!)
+        bottom_btn_view?.setOnNavigationItemSelectedListener(this)
         main_view_pager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
