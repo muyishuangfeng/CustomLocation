@@ -104,16 +104,14 @@ class SplashActivity : BaseActivity() {
             override fun onAnimationEnd(animation: Animator?) {
                 lav_splash.cancelAnimation()
                 //检测账号是否登陆
-                startActivity(MainActivity::class.java)
-                finish()
-//                val myInfo = JMessageClient.getMyInfo()
-//                if (myInfo == null) {
-//                    startActivity(LoginActivity::class.java)
-//                    finish()
-//                } else {
-//                    startActivity(MainActivity::class.java)
-//                    finish()
-//                }
+                val myInfo = JMessageClient.getMyInfo()
+                if (myInfo == null) {
+                    startActivity(LoginActivity::class.java)
+                    finish()
+                } else {
+                    startActivity(MainActivity::class.java)
+                    finish()
+                }
 
 
             }

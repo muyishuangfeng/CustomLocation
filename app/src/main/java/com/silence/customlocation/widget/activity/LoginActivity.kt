@@ -1,13 +1,14 @@
 package com.silence.customlocation.widget.activity
 
-import android.app.Dialog
 import android.text.TextUtils
+import androidx.lifecycle.ViewModelProvider
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.api.BasicCallback
 import com.silence.customlocation.R
 import com.silence.customlocation.base.BaseActivity
-import com.silence.customlocation.common.APP
 import com.silence.customlocation.common.Constants
+import com.silence.customlocation.db.ContactViewModel
+import com.silence.customlocation.db.User
 import com.silence.customlocation.util.SPUTil
 import com.silence.customlocation.util.RegularUtil.isContainChinese
 import com.silence.customlocation.util.RegularUtil.whatContain
@@ -19,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity(), CustomTitleBar.TitleClickListener {
 
     private var mIsLogin = false
+    private lateinit var viewModel: ContactViewModel
+
 
     override fun getLayoutID(): Int {
         return R.layout.activity_login
@@ -26,7 +29,7 @@ class LoginActivity : BaseActivity(), CustomTitleBar.TitleClickListener {
 
     override fun initData() {
         SPUTil.init(this)
-        title_login.setRightTitle(resources.getString(R.string.text_register))
+        title_login.setRightTitle(resources.getString(R.string.text_login))
         title_login.setTitleClickListener(this)
         btn_register.setOnClickListener {
             login()
@@ -38,6 +41,7 @@ class LoginActivity : BaseActivity(), CustomTitleBar.TitleClickListener {
     }
 
     override fun onRightClick() {
+        title_login.setRightTitle(resources.getString(R.string.text_register))
         mIsLogin = true
     }
 
@@ -104,9 +108,16 @@ class LoginActivity : BaseActivity(), CustomTitleBar.TitleClickListener {
                                     avatarFile.absolutePath
                                 )
                             }
+                            //数据库保存
                             val username = myInfo.userName
                             val appKey = myInfo.appKey
-                            //TODO:数据库保存
+                            val user = User()
+                            user.userName = username
+                            user.appKey = appKey
+                            viewModel =
+                                ViewModelProvider(this@LoginActivity).get(ContactViewModel::class.java)
+                            viewModel.insertUser(user)
+                            SPUTil.putAsyncString(Constants.USER_NAME, edt_account.text.toString())
                             startActivity(MainActivity::class.java)
                             ToastUtil.getInstance().shortToast(this@LoginActivity, "登陆成功")
                             finish()

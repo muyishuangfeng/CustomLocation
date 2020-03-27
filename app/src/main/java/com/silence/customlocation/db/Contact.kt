@@ -30,3 +30,35 @@ class Contact {
 
 
 }
+
+/**
+ * 用户表
+ */
+@Entity(tableName = "User")
+class User {
+
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "uid")
+    var uid: Int? = 0
+    @ColumnInfo(name = "userName")
+    var userName: String? = ""
+    @ColumnInfo(name = "userPhone")
+    var userPhone: String? = ""
+    @ColumnInfo(name = "userPass")
+    var userPass: String? = ""
+    @ColumnInfo(name = "userEmail")
+    var userEmail: String? = ""
+    @ColumnInfo(name = "userIconPath")
+    var userIconPath: String? = ""
+    @ColumnInfo(name = "appKey")
+    var appKey: String? = ""
+    @ColumnInfo(name = "userNickName")
+    var userNickName: String? = ""
+
+    override fun toString(): String {
+        return "User(uid=$uid, userName=$userName, userPhone=$userPhone, userPass=$userPass, userEmail=$userEmail, userIconPath=$userIconPath, appKey=$appKey, userNickName=$userNickName)"
+    }
+
+
+}

@@ -16,14 +16,18 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
     val allContacts: LiveData<MutableList<Contact>>
 
     init {
-        val contactDao = ContactDataBase.getDataBase(application,viewModelScope).contactDao()
+        val contactDao = ContactDataBase.getDataBase(application, viewModelScope).contactDao()
         repository = ContactRepository(contactDao)
         allContacts = repository.allContacts
     }
 
 
-    fun insert(contactBean: Contact) = viewModelScope.launch {
+    fun insertContact(contactBean: Contact) = viewModelScope.launch {
         repository.insert(contactBean)
+    }
+
+    fun insertUser(user: User) = viewModelScope.launch {
+        repository.insert(user)
     }
 
 

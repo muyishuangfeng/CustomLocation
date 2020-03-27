@@ -26,6 +26,16 @@ android {
                 JPUSH_APPKEY : "393e5507af231c943e7ee4d9", //JPush上注册的包名对应的appKey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+        //数据库导出
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+
+
+
     }
     buildTypes {
         release {
@@ -42,7 +52,10 @@ android {
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
-
+    // 数据库导出
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
 
 }
 
